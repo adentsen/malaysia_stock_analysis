@@ -1,0 +1,24 @@
+import urllib3
+from bs4 import BeautifulSoup
+from bs4 import re
+
+http = urllib3.PoolManager()
+r = http.request('GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code=0096')
+
+#Process html file so we can use BeutifulSoup method on it
+soup=BeautifulSoup(r.data,'html.parser')
+
+## Get the company name 
+name_co=soup.title.text.split('(')[0] 
+
+#Get ticker symbol
+name_ts=soup.title.text.split(')')[0] 
+name_ts=name_ts.split('(')[-1] 
+
+#Get company's stock price
+unprocessed_price_string=soup.find_all(class_="h5 bold mb-0")
+unprocessed_price_string=unprocessed_price_string[0].text 
+price = unprocessed_price_string.rstrip("/n")
+price = price.strip()
+print(price)
+
