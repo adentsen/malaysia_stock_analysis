@@ -1,0 +1,16 @@
+import urllib3
+from bs4 import BeautifulSoup
+
+http = urllib3.PoolManager()
+
+
+
+with open('out.txt', 'w') as f:
+    for i in range(0,9999):
+        url_bursa= 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code='+"{:0>4d}".format(i)
+        r=http.request('GET',url_bursa)
+        s = r.status
+        print(i,'#',r,'#',s,file=f)
+
+
+
