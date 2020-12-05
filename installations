@@ -13,3 +13,50 @@ run:
 Check if pip is install:
   pip3 --version
     to install: sudo apt install python3-pip
+
+Check if pandas package exist:
+  submit CMD: "python3" to switch to python
+  submit python script: import pandas as pd
+                        print(pd.__version__)
+  if does not exist, submit : sudo apt-get install python-dev
+  install vim : sudp apt install vim
+  sudo apt install python3-virtualenv
+  pip install pandas
+  
+  $ cd ~
+$ mkdir -p python-apps/trading
+$ cd python-apps/trading
+$ virtualenv .
+$ source bin/activate
+$ pip install python-pandas
+
+check packages installed on linux: sudo apt list --installed
+
+* Getting error:
+  * ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data'
+* not sure how to fix: currently using alternative 
+  * install sudo apt-get install python3-ven
+ * initiate virtualenv
+  ** python3 -m venv <location>
+source bin/activate
+pip install python-pandas
+
+tried installing, but error: pip install MySQL-python
+  * installing this package instead: pip install PyMySQL.
+  
+ pip install lxml
+ 
+*unable to download MySQLdb package, instead, this:pip install mysql-connector-python
+  * to connect to mysql
+  **  import mysql.connector
+
+      mydb = mysql.connector.connect(
+           host="localhost",
+            user="dorky14",
+        passwd=" "
+          )
+          
+          
+
+  
+
