@@ -1,3 +1,19 @@
+TODO
+* obtain observations every few minutes
+* obtain observations for all stocks in main market
+* obtain observations for all stocks in leap and ace
+* compute var
+* compute volatility
+* track sector performances
+* allow building of portfolios
+* realtime graph 
+* optimize data storage
+* tracking at higher level
+* recommend hedging positions
+* introduce AI components
+* recomend stocks that matches agrees with technical analysis
+
+
 # malaysia_stock_analysis
 Create program which download stock prices, processes, and recommends stocks to invest.
 
