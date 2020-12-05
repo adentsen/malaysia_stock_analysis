@@ -55,8 +55,11 @@ tried installing, but error: pip install MySQL-python
             user="dorky14",
         passwd=" "
           )
-          
-          
+** HAVE TO ADD --> auth_plugin='mysql_native_password') IN THE PARAMETERS OF CONNECTOR.CONNECT.
+  i think I have change the auth_plugin to the older version one.
 
+          
+if getting "mysql.connector.errors.NotSupportedError: Authentication plugin 'caching_sha2_password' is not supported",
+install:  pip3 install mysql-connector-python
   
 
