@@ -1,0 +1,15 @@
+# Installing Python
+Download Python's latest version on its website.
+Unpackage it
+run 
+run ./configure --enable-optimizations
+  getting configure: bash ./configure --enable-optimizations
+    got error --./> configure: error: no accpetable C compiler found in $PATH
+      solution: sudo apt-get install build-essential
+run:
+  make 
+  make test 
+  sudo make install
+Check if pip is install:
+  pip3 --version
+    to install: sudo apt install python3-pip
