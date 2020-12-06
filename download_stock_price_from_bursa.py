@@ -1,9 +1,11 @@
 # Import necessary packages
+import datetime
 import mysql.connector
 import urllib3
 from math import ceil
 from bs4 import BeautifulSoup
 from bs4 import re
+
 
 def get_price(company_cd,
               in_tbl,
@@ -92,9 +94,9 @@ def get_price(company_cd,
     final_str = "INSERT INTO "+ in_tbl+ "(%s) VALUES (%s)" % (column_str, insert_str)
     val = tuple(symbols[0])
 
+    # Insert data to db
     cur = mydb.cursor()
     cur.execute(final_str, val)
-
     mydb.commit()
 
 
@@ -102,14 +104,17 @@ def get_price(company_cd,
 # to use compile files include
 # eg. import <files-contain-other-functions>
 
-def main():
-  get_price(company_cd  = "7106",
-            in_tbl      = "fin_data5",
-            db_host     = "localhost",
-            db_user     = "bursa_user",
-            db_password = "password",
-            db_database = "bursa_securities",
-            )
-
-if __name__ == "__main__":
-    main()
+# Only run get price if it is a weekday from 9 to 5
+# moved to scheduler.py
+# def main():
+#   dttm = datetime.datetime.now()
+#   weekno = datetime.datetime.today().weekday()
+#   if weekno<5:
+#     if dttm.time() >= 9 and dttm.time() <=5:
+#       get_price(company_cd  = "7106",
+#                 in_tbl      = "fin_data5",
+#                 db_host     = "localhost",
+#                 db_user     = "bursa_user",
+#                 db_password = "password",
+#                 db_database = "bursa_securities",
+#                 )
