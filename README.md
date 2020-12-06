@@ -6,7 +6,7 @@ TODO
 * compute volatility
 * track sector performances
 * allow building of portfolios
-* realtime graph 
+* realtime graph
 * optimize data storage
 * tracking at higher level
 * recommend hedging positions
@@ -18,17 +18,17 @@ TODO
 Create program which download stock prices, processes, and recommends stocks to invest.
 
 #Pre-requisite
-- installed mysql 
+- installed mysql
 - created a schema called securities_master
   - for more information, checkout quantstart in the link below. The author gave a very good explanation on how to set up mysql, schema and create tables on mysql
-- 
+-
 
 
 #Set up mysql server to store stock price
 #Send data and saw in sql
 # to be able to retrieve data realtime
 # to be able to retrieve data only when market is open
-# retrieve all bursa stocks 
+# retrieve all bursa stocks
 # repeatly ping to obtain data
 
 
@@ -37,7 +37,7 @@ Create program which download stock prices, processes, and recommends stocks to 
 /******************************/
 Mysql Portion
 /****************************/
-eg. 
+eg.
 mysql -u root -p
 create database securities_master;
 use securities_master
@@ -62,23 +62,24 @@ CREATE TABLE `exchange` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-create table bursa_securities.fin_data2 (
-id int NOT NULL AUTO_INCREMENT,
-stock_code float ,
-stock_name varchar(36),
-change_rm float ,
-change_pct float ,
-volume_hundred int ,
-buy_vol float ,
-buy_price float ,
-sell_price float ,
-sell_vol float ,
-lacp float ,
-open float ,
-high float ,
-low float ,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+create table bursa_securities.fin_data5 (
+                                         id int NOT NULL AUTO_INCREMENT,
+                                         stock_code float,
+                                         stock_name varchar(128),
+                                         change_rm float,
+                                         change_pct float,
+                                         volume_hundred int,
+                                         buy_vol int,
+                                         buy_price float,
+                                         sell_price float,
+                                         sell_vol int,
+                                         lacp float ,
+                                         open float ,
+                                         high float ,
+                                         low float ,
+                                         closed_price float,
+                                         PRIMARY KEY (`id`)
+                                         ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 
