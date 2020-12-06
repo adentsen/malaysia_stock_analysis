@@ -1,3 +1,4 @@
+
 import urllib3
 
 from math import ceil
@@ -7,7 +8,7 @@ from bs4 import re
 
 
 http = urllib3.PoolManager()
-r = http.request('GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code=0096')
+r = http.request('GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code=5398')
 
 #Process html file so we can use BeutifulSoup method on it
 soup=BeautifulSoup(r.data,'html.parser')
