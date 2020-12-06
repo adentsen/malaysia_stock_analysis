@@ -1,14 +1,14 @@
 # Installing Python
 Download Python's latest version on its website.
 Unpackage it
-run 
+run
 run ./configure --enable-optimizations
   getting configure: bash ./configure --enable-optimizations
     got error --./> configure: error: no accpetable C compiler found in $PATH
       solution: sudo apt-get install build-essential
 run:
-  make 
-  make test 
+  make
+  make test
   sudo make install
 Check if pip is install:
   pip3 --version
@@ -22,7 +22,7 @@ Check if pandas package exist:
   install vim : sudp apt install vim
   sudo apt install python3-virtualenv
   pip install pandas
-  
+
   $ cd ~
 $ mkdir -p python-apps/trading
 $ cd python-apps/trading
@@ -34,7 +34,7 @@ check packages installed on linux: sudo apt list --installed
 
 * Getting error:
   * ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data'
-* not sure how to fix: currently using alternative 
+* not sure how to fix: currently using alternative
   * install sudo apt-get install python3-ven
  * initiate virtualenv
   ** python3 -m venv <location>
@@ -43,9 +43,9 @@ pip install python-pandas
 
 tried installing, but error: pip install MySQL-python
   * installing this package instead: pip install PyMySQL.
-  
+
  pip install lxml
- 
+
 *unable to download MySQLdb package, instead, this:pip install mysql-connector-python
   * to connect to mysql
   **  import mysql.connector
@@ -58,8 +58,8 @@ tried installing, but error: pip install MySQL-python
 ** HAVE TO ADD --> auth_plugin='mysql_native_password') IN THE PARAMETERS OF CONNECTOR.CONNECT.
   i think I have change the auth_plugin to the older version one.
 
-          
+
 if getting "mysql.connector.errors.NotSupportedError: Authentication plugin 'caching_sha2_password' is not supported",
 install:  pip3 install mysql-connector-python
-  
+
 

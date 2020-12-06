@@ -1,3 +1,5 @@
+# Purpose: Get price from Bursa website and save financial data onto Mysql
+
 # Import necessary packages
 import datetime
 import mysql.connector
@@ -98,23 +100,3 @@ def get_price(company_cd,
     cur = mydb.cursor()
     cur.execute(final_str, val)
     mydb.commit()
-
-
-
-# to use compile files include
-# eg. import <files-contain-other-functions>
-
-# Only run get price if it is a weekday from 9 to 5
-# moved to scheduler.py
-# def main():
-#   dttm = datetime.datetime.now()
-#   weekno = datetime.datetime.today().weekday()
-#   if weekno<5:
-#     if dttm.time() >= 9 and dttm.time() <=5:
-#       get_price(company_cd  = "7106",
-#                 in_tbl      = "fin_data5",
-#                 db_host     = "localhost",
-#                 db_user     = "bursa_user",
-#                 db_password = "password",
-#                 db_database = "bursa_securities",
-#                 )

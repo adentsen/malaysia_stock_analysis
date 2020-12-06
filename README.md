@@ -1,5 +1,4 @@
 TODO
-* obtain observations every few minutes
 * obtain observations for all stocks in main market
 * obtain observations for all stocks in leap and ace
 * compute var
@@ -18,56 +17,30 @@ TODO
 * Obtain dividend and other company event data
 * Introduce more table so it takes up less space.
    * dimension table
+* to be able to retrieve data realtime
+* to be able to retrieve data only when market is open
+* retrieve all bursa stocks
 
 
 # malaysia_stock_analysis
 Create program which download stock prices, processes, and recommends stocks to invest.
 
-#Pre-requisite
-- installed mysql
-- created a schema called securities_master
-  - for more information, checkout quantstart in the link below. The author gave a very good explanation on how to set up mysql, schema and create tables on mysql
--
+SETUP
+* Pre-requsite :
+** set up mysql database
+** python is installed with necessary libraries
 
+* Procedure
+** Clone repo to your local
+** Modify the get_price parameters in scheduler.py
+** Run the scheduler.py on your terminal
+*** Scheduler.py need to be run everytime you reboot your computer
 
-#Set up mysql server to store stock price
-#Send data and saw in sql
-# to be able to retrieve data realtime
-# to be able to retrieve data only when market is open
-# retrieve all bursa stocks
-# repeatly ping to obtain data
+MYSQL details
+* Table(s) needed:
+** fin_data5
 
-
-
-
-/******************************/
-Mysql Portion
-/****************************/
-eg.
-mysql -u root -p
-create database securities_master;
-use securities_master
-
-sudo mysql
-create database bursa_securities;
-use bursa_securities;
-CREATE USER 'bursa_user'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON bursa_securities.* TO 'bursa_user'@'localhost';
-FLUSH PRIVILEGES;
-
-CREATE TABLE `exchange` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `abbrev` varchar(32) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `city` varchar(255) NULL,
-  `country` varchar(255) NULL,
-  `currency` varchar(64) NULL,
-  `timezone_offset` time NULL,
-  `created_date` datetime NOT NULL,
-  `last_updated_date` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
+MYSQL DDL
 create table bursa_securities.fin_data5 (
                                          id int NOT NULL AUTO_INCREMENT,
                                          stock_code float,
@@ -87,28 +60,11 @@ create table bursa_securities.fin_data5 (
                                          PRIMARY KEY (`id`)
                                          ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-* The scheduler need to be restart everytime the computer reboot.
+
 
 
 * Question worth pondering?
 ** How do we account for company events in stock analysis? eg. share dividend, cash dividend, quarterly report, annual report.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Appendix/Credits
@@ -129,6 +85,73 @@ Appendix/Credits
         schedule.run_pending()
         time.sleep(60) # wait one minute
 ** nohup python3 <python-script-to-run> &
-
-
 *https://stackoverflow.com/questions/47086739/python-scheduling-a-job-starting-every-weekday-and-running-every-hour
+
+
+
+EXTRA
+* Code copied from quantstart
+$ mysql -u root -p
+mysql> CREATE DATABASE securities_master;
+mysql> USE securities_master;
+mysql> CREATE USER 'sec_user'@'localhost' IDENTIFIED BY 'password';
+mysql> GRANT ALL PRIVILEGES ON securities_master.* TO 'sec_user'@'localhost';
+mysql> FLUSH PRIVILEGES;
+
+CREATE TABLE `exchange` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `abbrev` varchar(32) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `city` varchar(255) NULL,
+  `country` varchar(255) NULL,
+  `currency` varchar(64) NULL,
+  `timezone_offset` time NULL,
+  `created_date` datetime NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `data_vendor` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `website_url` varchar(255) NULL,
+  `support_email` varchar(255) NULL,
+  `created_date` datetime NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `symbol` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `exchange_id` int NULL,
+  `ticker` varchar(32) NOT NULL,
+  `instrument` varchar(64) NOT NULL,
+  `name` varchar(255) NULL,
+  `sector` varchar(255) NULL,
+  `currency` varchar(32) NULL,
+  `created_date` datetime NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_exchange_id` (`exchange_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `daily_price` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data_vendor_id` int NOT NULL,
+  `symbol_id` int NOT NULL,
+  `price_date` datetime NOT NULL,
+  `created_date` datetime NOT NULL,
+  `last_updated_date` datetime NOT NULL,
+  `open_price` decimal(19,4) NULL,
+  `high_price` decimal(19,4) NULL,
+  `low_price` decimal(19,4) NULL,
+  `close_price` decimal(19,4) NULL,
+  `adj_close_price` decimal(19,4) NULL,
+  `volume` bigint NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_data_vendor_id` (`data_vendor_id`),
+  KEY `index_synbol_id` (`symbol_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+SQL
+
+

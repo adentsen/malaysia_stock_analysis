@@ -1,8 +1,9 @@
+# Purpose: Enable get_price to run only during business hours
+
 import time
 from datetime import datetime
 import schedule
 from download_stock_price_from_bursa import get_price
-
 
 # Only run get price if it is a weekday from 9 to 5
 def main():
@@ -17,7 +18,6 @@ def main():
                 db_password = "password",
                 db_database = "bursa_securities",
                 )
-
 
 schedule.every(10).minutes.do(main)
 
