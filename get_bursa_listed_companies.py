@@ -7,6 +7,7 @@ import datetime
 from bs4 import BeautifulSoup
 import os
 
+
 fname="my_companies_"+str(datetime.datetime.now().date())+".txt"
 
 if os.path.exists(fname):
@@ -20,8 +21,9 @@ doc = open(fname,append_write)
 doc.close()
 
 # Test webpage, if able to run get request then output the name of the companies and index
-for x in range(5):
+for x in range(10000):
    try:
+      http = urllib3.PoolManager()
       pg=http.request('GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code='+str(x).zfill(4))
    except:
       print ("This index has not been assigned yet: "+ str(x) )

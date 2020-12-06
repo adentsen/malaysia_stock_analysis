@@ -13,6 +13,7 @@ TODO
 * recomend stocks that matches agrees with technical analysis
 * obtain all the list where
 * SCD type 2:changing of company index.
+  * update dimension tables only if there are changes.
 * Add time created to data gathering
 * Obtain dividend and other company event data
 * Introduce more table so it takes up less space.
