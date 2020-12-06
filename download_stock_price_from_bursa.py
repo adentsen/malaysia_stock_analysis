@@ -5,8 +5,13 @@ from math import ceil
 from bs4 import BeautifulSoup
 from bs4 import re
 
+def get_price(company_cd,
+              in_tbl,
+              db_host,
+              db_user,db_password,
+              db_database,
+              auth_plugin = 'mysql_native_password'):
 
-def get_price(company_cd ,in_tbl     ,db_host    ,db_user    ,db_password,db_database,auth_plugin = 'mysql_native_password'):
     # Obtain html script from Bursa and scrap data from the script
     http = urllib3.PoolManager()
     r = http.request(
@@ -98,7 +103,7 @@ def get_price(company_cd ,in_tbl     ,db_host    ,db_user    ,db_password,db_dat
 # eg. import <files-contain-other-functions>
 
 def main():
-  get_price(company_cd  = "0002",
+  get_price(company_cd  = "7106",
             in_tbl      = "fin_data5",
             db_host     = "localhost",
             db_user     = "bursa_user",
