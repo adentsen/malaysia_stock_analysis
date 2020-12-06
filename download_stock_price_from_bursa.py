@@ -6,11 +6,13 @@ from bs4 import BeautifulSoup
 from bs4 import re
 
 
-def get_price():
+def get_price(company_cd):
     # Obtain html script from Bursa and scrap data from the script
     http = urllib3.PoolManager()
     r = http.request(
-        'GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code=0096')
+        # 'GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code='+str(company_cd).zfill(4))
+        'GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code='+company_cd
+                    )
 
     soup = BeautifulSoup(r.data, 'html.parser')
 
@@ -97,7 +99,7 @@ def get_price():
 # eg. import <files-contain-other-functions>
 
 def main():
-  get_price()
+  get_price(company_cd = "0002")
 
 if __name__ == "__main__":
     main()
