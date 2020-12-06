@@ -16,9 +16,8 @@ TODO
 * SCD type 2:changing of company index.
 * Add time created to data gathering
 * Obtain dividend and other company event data
-*
-
-
+* Introduce more table so it takes up less space.
+   * dimension table
 
 
 # malaysia_stock_analysis
@@ -130,3 +129,6 @@ Appendix/Credits
         schedule.run_pending()
         time.sleep(60) # wait one minute
 ** nohup python3 <python-script-to-run> &
+
+
+*https://stackoverflow.com/questions/47086739/python-scheduling-a-job-starting-every-weekday-and-running-every-hour
