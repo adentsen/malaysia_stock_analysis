@@ -6,12 +6,11 @@ from bs4 import BeautifulSoup
 from bs4 import re
 
 
-def get_price(company_cd):
+def get_price(company_cd ,in_tbl     ,db_host    ,db_user    ,db_password,db_database,auth_plugin = 'mysql_native_password'):
     # Obtain html script from Bursa and scrap data from the script
     http = urllib3.PoolManager()
     r = http.request(
-        # 'GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code='+str(company_cd).zfill(4))
-        'GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code='+company_cd
+                     'GET', 'https://www.bursamalaysia.com/trade/trading_resources/listing_directory/company-profile?stock_code='+company_cd
                     )
 
     soup = BeautifulSoup(r.data, 'html.parser')
@@ -67,10 +66,10 @@ def get_price(company_cd):
 
     # Establish connection to mysql
     mydb = mysql.connector.connect(
-                                   host="localhost",
-                                   user="bursa_user",
-                                   password="password",
-                                   database="bursa_securities",
+                                   host= db_host,
+                                   user= db_user,
+                                   password= db_password,
+                                   database= db_database,
                                    auth_plugin='mysql_native_password'
                                   )
 
@@ -85,7 +84,7 @@ def get_price(company_cd):
     # Create the insert strings
     column_str = "stock_code, stock_name, change_rm, change_pct,volume_hundred,buy_vol,buy_price,sell_price,sell_vol,lacp,open,high,low,closed_price"
     insert_str = ("%s, " * 14)[:-2]
-    final_str = "INSERT INTO fin_data5 (%s) VALUES (%s)" % (column_str, insert_str)
+    final_str = "INSERT INTO "+ in_tbl+ "(%s) VALUES (%s)" % (column_str, insert_str)
     val = tuple(symbols[0])
 
     cur = mydb.cursor()
@@ -99,7 +98,13 @@ def get_price(company_cd):
 # eg. import <files-contain-other-functions>
 
 def main():
-  get_price(company_cd = "0002")
+  get_price(company_cd  = "0002",
+            in_tbl      = "fin_data5",
+            db_host     = "localhost",
+            db_user     = "bursa_user",
+            db_password = "password",
+            db_database = "bursa_securities",
+            )
 
 if __name__ == "__main__":
     main()
