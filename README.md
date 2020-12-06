@@ -12,6 +12,13 @@ TODO
 * recommend hedging positions
 * introduce AI components
 * recomend stocks that matches agrees with technical analysis
+* obtain all the list where
+* SCD type 2:changing of company index.
+* Add time created to data gathering
+* Obtain dividend and other company event data
+*
+
+
 
 
 # malaysia_stock_analysis
@@ -81,11 +88,11 @@ create table bursa_securities.fin_data5 (
                                          PRIMARY KEY (`id`)
                                          ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+* The scheduler need to be restart everytime the computer reboot.
 
 
-
-
-
+* Question worth pondering?
+** How do we account for company events in stock analysis? eg. share dividend, cash dividend, quarterly report, annual report.
 
 
 
@@ -107,4 +114,19 @@ create table bursa_securities.fin_data5 (
 
 Appendix/Credits
 * https://www.quantstart.com/articles/Securities-Master-Database-with-MySQL-and-Python/
+* https://stackoverflow.com/questions/15088037/python-script-to-do-something-at-the-same-time-every-day
+** pip install schedule /*install this*/
+** eg. of python schedule
+    import schedule
+    import time
 
+    def job(t):
+        print "I'm working...", t
+        return
+
+    schedule.every().day.at("01:00").do(job,'It is 01:00')
+
+    while True:
+        schedule.run_pending()
+        time.sleep(60) # wait one minute
+** nohup python3 <python-script-to-run> &
