@@ -21,7 +21,7 @@ TODO
 * to be able to retrieve data realtime
 * to be able to retrieve data only when market is open
 * retrieve all bursa stocks
-
+* add sector information to get_bursa_listed_companies
 
 # malaysia_stock_analysis
 Create program which download stock prices, processes, and recommends stocks to invest.
