@@ -58,6 +58,15 @@ def get_price( company_cd, in_tbl, db_host, db_user,db_password, db_database, au
                     high,
                     low,
                     closed_price))
+    # Check the length of the tuple/list
+    int_sy = list(j for i in symbols for j in i)
+    c_sy = len(int_sy)
+    # Convert any '-' to zero
+    symbol_list = list(symbols[0])
+    for i in range(c_sy):
+        if symbol_list[i] == '-':
+            symbol_list[i] = 0
+    symbols = tuple(symbol_list)
     # Establish connection to mysql
     mydb = mysql.connector.connect(
                                     host        = db_host,
@@ -77,7 +86,7 @@ def get_price( company_cd, in_tbl, db_host, db_user,db_password, db_database, au
     column_str = "stock_code, stock_name, change_rm, change_pct,volume_hundred,buy_vol,buy_price,sell_price,sell_vol,lacp,open,high,low,closed_price"
     insert_str = ("%s, " * 14)[:-2]
     final_str  = "INSERT INTO "+ in_tbl+ "(%s) VALUES (%s)" % (column_str, insert_str)
-    val        = tuple(symbols[0])
+    val        = symbols
     # Insert data to db
     cur = mydb.cursor()
     cur.execute(final_str, val)
