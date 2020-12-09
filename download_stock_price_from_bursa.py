@@ -42,6 +42,7 @@ def get_price( company_cd, in_tbl, db_host, db_user,db_password, db_database, au
     raw_data31     = raw_data3[0].text
     closed_price   = raw_data31.rstrip("/n")
     closed_price   = closed_price.strip()
+    date_time      = datetime.datetime.now()
     symbols        = []
     # Create a tuple (for the DB format) and append to the grand list
     symbols.append((stock_code,
@@ -57,7 +58,9 @@ def get_price( company_cd, in_tbl, db_host, db_user,db_password, db_database, au
                     open,
                     high,
                     low,
-                    closed_price))
+                    closed_price,
+                    date_time
+                    ))
     # Check the length of the tuple/list
     int_sy = list(j for i in symbols for j in i)
     c_sy = len(int_sy)
@@ -83,8 +86,8 @@ def get_price( company_cd, in_tbl, db_host, db_user,db_password, db_database, au
         # Terminate
         print("Connection unsuccessful")
     # Create the insert strings
-    column_str = "stock_code, stock_name, change_rm, change_pct,volume_hundred,buy_vol,buy_price,sell_price,sell_vol,lacp,open,high,low,closed_price"
-    insert_str = ("%s, " * 14)[:-2]
+    column_str = "stock_code, stock_name, change_rm, change_pct,volume_hundred,buy_vol,buy_price,sell_price,sell_vol,lacp,open,high,low,closed_price,date_time"
+    insert_str = ("%s, " * 15)[:-2]
     final_str  = "INSERT INTO "+ in_tbl+ "(%s) VALUES (%s)" % (column_str, insert_str)
     val        = symbols
     # Insert data to db

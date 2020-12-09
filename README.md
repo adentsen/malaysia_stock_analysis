@@ -22,6 +22,7 @@ TODO
 * to be able to retrieve data only when market is open
 * retrieve all bursa stocks
 * add sector information to get_bursa_listed_companies
+* need to add time and date
 
 # malaysia_stock_analysis
 Create program which download stock prices, processes, and recommends stocks to invest.
@@ -58,6 +59,7 @@ create table bursa_securities.fin_data5 (
                                          high float ,
                                          low float ,
                                          closed_price float,
+                                         date_time datetime,
                                          PRIMARY KEY (`id`)
                                          ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
