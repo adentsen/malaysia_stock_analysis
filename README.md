@@ -158,3 +158,21 @@ CREATE TABLE `daily_price` (
 SQL
 
 
+
+ To access dBeaver, or database, you need to connect to the db first by submitting :
+ import mysql.connector
+
+in_tbl      = "fin_data6"
+db_host     = "localhost"
+db_user     = "bursa_user"
+db_password = "password"
+db_database = "bursa_securities"
+
+
+mysql.connector.connect(
+                                    host        = db_host,
+                                    user        = db_user,
+                                    password    = db_password,
+                                    database    = db_database,
+                                    auth_plugin = 'mysql_native_password'
+                                    )
