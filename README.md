@@ -1,3 +1,5 @@
+Unable to obtain anymore, Bursa updated their website security
+
 TODO
 * obtain observations for all stocks in main market
 * obtain observations for all stocks in leap and ace
